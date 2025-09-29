@@ -17,4 +17,18 @@ public interface BankAccount extends DataObject {
     default JsonObject toJson() throws IllegalStateException {
         return DataObject.super.toJson();
     }
+
+    default boolean hasSufficientBalance(BigDecimal amount) {
+        return (getAccountBalance().compareTo(amount) >= 0);
+    }
+
+    BankAccount updateBalance(BigDecimal accountBalance);
+
+    default BankAccount addBalance(BigDecimal amount) {
+        return updateBalance(getAccountBalance().add(amount));
+    }
+
+    default BankAccount subtractBalance(BigDecimal amount) {
+        return updateBalance(getAccountBalance().subtract(amount));
+    }
 }

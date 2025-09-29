@@ -52,21 +52,12 @@ public record SavingsAccount(UUID savingsUUID, UUID ownerUUID, BigDecimal saving
         return savingsName;
     }
 
-    public SavingsAccount addBalance(BigDecimal amount) {
+    @Override
+    public BankAccount updateBalance(BigDecimal accountBalance) {
         return new SavingsAccount(
                 savingsUUID,
                 ownerUUID,
-                savingsBalance.add(amount),
-                accumulatedInterest,
-                savingsName
-        );
-    }
-
-    public SavingsAccount subtractBalance(BigDecimal amount) {
-        return new SavingsAccount(
-                savingsUUID,
-                ownerUUID,
-                savingsBalance.subtract(amount),
+                accountBalance,
                 accumulatedInterest,
                 savingsName
         );

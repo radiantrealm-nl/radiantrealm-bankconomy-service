@@ -48,18 +48,11 @@ public record FundingsAccount(UUID fundingsUUID, BigDecimal fundingsBalance, Str
         return fundingsName;
     }
 
-    public FundingsAccount addBalance(BigDecimal amount) {
+    @Override
+    public BankAccount updateBalance(BigDecimal accountBalance) {
         return new FundingsAccount(
                 fundingsUUID,
-                fundingsBalance.add(amount),
-                fundingsName
-        );
-    }
-
-    public FundingsAccount subtractBalance(BigDecimal amount) {
-        return new FundingsAccount(
-                fundingsUUID,
-                fundingsBalance.subtract(amount),
+                accountBalance,
                 fundingsName
         );
     }

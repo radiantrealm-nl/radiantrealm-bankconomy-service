@@ -48,18 +48,11 @@ public record PlayerAccount(UUID playerUUID, BigDecimal playerBalance, String pl
         return playerName;
     }
 
-    public PlayerAccount addBalance(BigDecimal amount) {
+    @Override
+    public BankAccount updateBalance(BigDecimal accountBalance) {
         return new PlayerAccount(
                 playerUUID,
-                playerBalance.add(amount),
-                playerName
-        );
-    }
-
-    public PlayerAccount subtractBalance(BigDecimal amount) {
-        return new PlayerAccount(
-                playerUUID,
-                playerBalance.subtract(amount),
+                accountBalance,
                 playerName
         );
     }
