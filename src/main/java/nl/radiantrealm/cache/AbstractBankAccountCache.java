@@ -45,6 +45,21 @@ public abstract class AbstractBankAccountCache<V extends BankAccount> extends Ca
         put(value.getAccountUUID(), value);
     }
 
+    public void update(UUID uuid) {
+        try {
+            V value = load(uuid);
+
+            if (value == null) {
+                remove(uuid);
+                return;
+            }
+
+            put(value);
+        } catch (Exception e) {
+            remove(uuid);
+        }
+    }
+
     @Override
     protected V load(UUID uuid) throws Exception {
         try (Connection connection = Database.getConnection()) {
